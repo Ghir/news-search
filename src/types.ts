@@ -38,9 +38,9 @@ export enum ListType {
   Headlines = 'top-headlines'
 }
 
-export interface RootState {
-  sources: Source[],
-  favorites: Source[],
-  articles: Article[],
-  showFavorites: boolean
+export interface State {
+  sources: Source[];
+  favorites: Source[];
+  articles: Article[];
+  showFavorites: boolean;
 }
