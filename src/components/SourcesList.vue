@@ -1,28 +1,34 @@
 <template>
   <div v-if="sources.length">
-    <v-text-field v-model="search"
-                  append-icon="mdi-magnify"
-                  label="Search"
-                  single-line
-                  hide-details
-                  clearable
-                  solo
-                  class="search-field"></v-text-field>
+    <v-text-field
+      v-model="search"
+      append-icon="mdi-magnify"
+      label="Search"
+      single-line
+      hide-details
+      clearable
+      solo
+      class="search-field"
+    ></v-text-field>
 
-    <v-data-table :headers="headers"
-                  :items="currentSources"
-                  :search="search"
-                  class="elevation-1"
-                  hide-default-footer
-                  hide-default-header
-                  disable-pagination
-                  :sort-by="sort">
+    <v-data-table
+      :headers="headers"
+      :items="currentSources"
+      :search="search"
+      class="elevation-1"
+      hide-default-footer
+      hide-default-header
+      disable-pagination
+      :sort-by="sort"
+    >
       <template v-slot:header="{ props: { headers } }">
         <thead>
           <tr>
-            <th v-for="header of headers"
-                :key="header.value"
-                @click="sort = header.value">
+            <th
+              v-for="header of headers"
+              :key="header.value"
+              @click="sort = header.value"
+            >
               {{ header.text }}
             </th>
             <th>Favorite</th>
@@ -32,8 +38,7 @@
 
       <template v-slot:item="{ item }">
         <tr @click="navigate(item.id)">
-          <td v-for="el of headers"
-              :key="el.value">
+          <td v-for="el of headers" :key="el.value">
             {{ item[el.value] | capitalize }}
           </td>
           <td>
@@ -43,13 +48,12 @@
           </td>
         </tr>
       </template>
-
     </v-data-table>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { DataTableHeader } from 'vuetify';
 import { Source } from '@/types';
 import { mapState } from 'vuex';

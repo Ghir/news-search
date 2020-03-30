@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import SourcesList from '@/components/SourcesList.vue'
-import SearchBar from '@/components/SearchBar.vue'
+import SourcesList from '@/components/SourcesList.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 export default {
   name: 'Home',
@@ -20,7 +20,7 @@ export default {
     SourcesList,
     SearchBar
   }
-}
+};
 </script>
 <style scoped lang="scss">
 .section-search,

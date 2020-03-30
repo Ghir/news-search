@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ArticleList from '@/components/ArticleList.vue'
+import ArticleList from '@/components/ArticleList.vue';
 
 export default {
   name: 'Articles',
@@ -11,5 +11,5 @@ export default {
     ArticleList
   },
   props: ['name']
-}
+};
 </script>

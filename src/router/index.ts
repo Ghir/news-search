@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Sources from '../views/Sources.vue'
-import Articles from '../views/Articles.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Sources from '../views/Sources.vue';
+import Articles from '../views/Articles.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -17,10 +17,10 @@ const routes = [
     component: Articles,
     props: true
   }
-]
+];
 
 const router = new VueRouter({
   routes
-})
+});
 
-export default router
+export default router;

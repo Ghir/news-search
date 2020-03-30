@@ -1,34 +1,36 @@
 <template>
   <div class="search-container">
     <div class="select">
-      <v-select class="title category-select"
-                height="60px"
-                loader-height="5"
-                v-model="selectedCategory"
-                :items="categories"
-                label="Category"
-                outlined
-                background-color="#fff">
+      <v-select
+        class="title category-select"
+        height="60px"
+        loader-height="5"
+        v-model="selectedCategory"
+        :items="categories"
+        label="Category"
+        outlined
+        background-color="#fff"
+      >
         <template v-slot:item="{ item }">
           <div class="select-item">{{ item.text }}</div>
         </template>
       </v-select>
     </div>
 
-    <v-btn @click="onSearch()"
-           color="#fff"
-           height="60px"
-           large>Search</v-btn>
+    <v-btn @click="onSearch()" color="#fff" height="60px" large>Search</v-btn>
 
-    <v-btn @click="onToggleFavorites()"
-           :color="$store.state.showFavorites ? '#E5E5E5' : '#fff'"
-           height="60px"
-           large>Favorites</v-btn>
+    <v-btn
+      @click="onToggleFavorites()"
+      :color="$store.state.showFavorites ? '#E5E5E5' : '#fff'"
+      height="60px"
+      large
+      >Favorites</v-btn
+    >
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Articles extends Vue {

@@ -1,36 +1,39 @@
 <template>
   <div>
     <div class="section-top">
-      <router-link class="link-back"
-                   to="/">
+      <router-link class="link-back" to="/">
         <v-icon size="40px">mdi-arrow-left</v-icon>
       </router-link>
 
       <div class="buttons-container">
-        <v-btn @click="loadArticles(ListType.Headlines)"
-               :color="showAll ? '#fff' : '#E5E5E5'"
-               height="60px"
-               large>Top Headlines</v-btn>
+        <v-btn
+          @click="loadArticles(ListType.Headlines)"
+          :color="showAll ? '#fff' : '#E5E5E5'"
+          height="60px"
+          large
+          >Top Headlines</v-btn
+        >
 
-        <v-btn @click="loadArticles(ListType.All)"
-               :color="showAll ? '#E5E5E5' : '#fff'"
-               height="60px"
-               large>All</v-btn>
+        <v-btn
+          @click="loadArticles(ListType.All)"
+          :color="showAll ? '#E5E5E5' : '#fff'"
+          height="60px"
+          large
+          >All</v-btn
+        >
       </div>
     </div>
 
     <div class="section-articles">
       <div class="articles-list">
-
-        <v-card @click="openArticle(article)"
-                max-width="344"
-                v-for="article of articles"
-                :key="article.url">
-          <a :href="article.url"
-             target="_blank"
-             rel="noopener noreferrer">
-            <v-img :src="getImgUrl(article)"
-                   height="200px"></v-img>
+        <v-card
+          @click="openArticle(article)"
+          max-width="344"
+          v-for="article of articles"
+          :key="article.url"
+        >
+          <a :href="article.url" target="_blank" rel="noopener noreferrer">
+            <v-img :src="getImgUrl(article)" height="200px"></v-img>
             <v-card-subtitle>
               {{ article.source.name }}
             </v-card-subtitle>
@@ -42,7 +45,6 @@
             </v-card-text>
           </a>
         </v-card>
-
       </div>
     </div>
   </div>
@@ -72,7 +74,7 @@ export default class ArticleList extends Vue {
     const url =
       article.urlToImage !== 'null'
         ? article.urlToImage
-        : require('../../public/img_placeholder.png');
+        : require('../assets/img_placeholder.png');
 
     return url;
   }
