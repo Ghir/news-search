@@ -1,29 +1,23 @@
-# news-search
+### News Search
 
-## Project setup
-```
-npm install
-```
+See all the latest articles, searching by topic and news source.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Screenshot](https://user-images.githubusercontent.com/33903713/77981957-769c2300-730b-11ea-8107-c5abca8de43b.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+&nbsp;
+&nbsp;
+&nbsp;
 
-### Run your unit tests
-```
-npm run test:unit
-```
+#### Running
 
-### Lints and fixes files
-```
-npm run lint
-```
+- `npm install`
+- `npm run serve`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### Technologies
+
+- Vue.js
+- Typescript
+- Vuex
+- Vuetify
+- Jest
+- EsLint
