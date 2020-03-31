@@ -17,7 +17,14 @@
       </v-select>
     </div>
 
-    <v-btn @click="onSearch()" color="#fff" height="60px" large>Search</v-btn>
+    <v-btn
+      @click="onSearch()"
+      color="#fff"
+      height="60px"
+      large
+      :loading="isLoading"
+      >Search</v-btn
+    >
 
     <v-btn
       @click="onToggleFavorites()"
@@ -31,8 +38,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapState } from 'vuex';
 
-@Component
+@Component({
+  computed: { ...mapState(['isLoading']) }
+})
 export default class Articles extends Vue {
   categories = [
     { text: 'All', value: '' },
@@ -45,6 +55,7 @@ export default class Articles extends Vue {
     { text: 'Technology', value: 'technology' }
   ];
 
+  isLoading: boolean;
   selectedCategory = '';
 
   onSearch(): void {

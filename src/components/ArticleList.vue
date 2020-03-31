@@ -8,17 +8,19 @@
       <div class="buttons-container">
         <v-btn
           @click="loadArticles(ListType.Headlines)"
-          :color="showAll ? '#fff' : '#E5E5E5'"
+          :color="currentSearchType === ListType.All ? '#fff' : '#E5E5E5'"
           height="60px"
           large
+          :loading="isLoading && currentSearchType === ListType.Headlines"
           >Top Headlines</v-btn
         >
 
         <v-btn
           @click="loadArticles(ListType.All)"
-          :color="showAll ? '#E5E5E5' : '#fff'"
+          :color="currentSearchType === ListType.All ? '#E5E5E5' : '#fff'"
           height="60px"
           large
+          :loading="isLoading && currentSearchType === ListType.All"
           >All</v-btn
         >
       </div>
@@ -27,10 +29,9 @@
     <div class="section-articles">
       <div class="articles-list">
         <v-card
-          @click="openArticle(article)"
           max-width="344"
           v-for="article of articles"
-          :key="article.url"
+          :key="article.title"
         >
           <a :href="article.url" target="_blank" rel="noopener noreferrer">
             <v-img :src="getImgUrl(article)" height="200px"></v-img>
@@ -38,10 +39,10 @@
               {{ article.source.name }}
             </v-card-subtitle>
             <v-card-title class="body-1">
-              {{ article.title }}
+              {{ article.title | cutText('title') }}
             </v-card-title>
             <v-card-text>
-              {{ article.description }}
+              {{ article.description | cutText('description') }}
             </v-card-text>
           </a>
         </v-card>
@@ -56,15 +57,27 @@ import { ListType, Article } from '@/types';
 import { mapState } from 'vuex';
 
 @Component({
-  computed: { ...mapState(['articles']) }
+  computed: { ...mapState(['articles', 'isLoading']) },
+  filters: {
+    cutText: (value: string, type: string): string => {
+      if (!value) {
+        return '';
+      }
+      if (type === 'title') {
+        return value.length > 120 ? `${value.slice(0, 120)}...` : value;
+      }
+      return value.length > 180 ? `${value.slice(0, 180)}...` : value;
+    }
+  }
 })
 export default class ArticleList extends Vue {
   @Prop()
   sourceName: string;
 
-  showAll = false;
   ListType = ListType;
   articles: Article[];
+  currentSearchType = ListType.Headlines;
+  isLoading: boolean;
 
   created(): void {
     this.loadArticles(ListType.Headlines);
@@ -72,7 +85,7 @@ export default class ArticleList extends Vue {
 
   getImgUrl(article: Article): string {
     const url =
-      article.urlToImage !== 'null'
+      article.urlToImage && article.urlToImage !== 'null'
         ? article.urlToImage
         : require('../assets/img_placeholder.png');
 
@@ -80,8 +93,8 @@ export default class ArticleList extends Vue {
   }
 
   loadArticles(type: ListType): void {
+    this.currentSearchType = type;
     this.$store.dispatch('loadArticles', { source: this.sourceName, type });
-    this.showAll = type === ListType.All;
   }
 }
 </script>
