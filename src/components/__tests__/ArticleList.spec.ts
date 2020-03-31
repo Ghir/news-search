@@ -1,6 +1,6 @@
 import ArticleList from '@/components/ArticleList.vue';
 import { articlesResMock } from '@/mocks/articlesMock';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuex, { Store } from 'vuex';
@@ -15,6 +15,7 @@ describe('ArticleList.vue', () => {
   let state;
   let actions;
   let store: Store<State>;
+  let wrapper: Wrapper<any>;
 
   beforeEach(() => {
     vuetify = new Vuetify();
@@ -28,32 +29,24 @@ describe('ArticleList.vue', () => {
       actions,
       state
     });
-  });
-
-  it('should show the right number of articles', async () => {
-    const wrapper = mount(ArticleList, {
+    wrapper = mount(ArticleList, {
       store,
       localVue,
       vuetify,
       stubs: ['router-link']
     });
+  });
+
+  it('should show the right number of articles', async () => {
     const articles = wrapper.findAll('.v-card');
     expect(articles.length).toBe(articlesResMock.articles.length);
   });
 
   it('should load headlines', async () => {
-    mount(ArticleList, { store, localVue, vuetify, stubs: ['router-link'] });
-
     expect(actions.loadArticles).toHaveBeenCalled();
   });
 
   it('should load all articles', async () => {
-    const wrapper = mount(ArticleList, {
-      store,
-      localVue,
-      vuetify,
-      stubs: ['router-link']
-    });
     wrapper
       .findAll('.v-btn')
       .at(1)
