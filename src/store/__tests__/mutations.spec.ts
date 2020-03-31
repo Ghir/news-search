@@ -1,6 +1,6 @@
 import { articlesResMock } from '@/mocks/articlesMock';
-import { sourcesResMock } from '@/mocks/sourcesMock';
 import { mutations } from '../index';
+import { sourcesResMock } from './../../mocks/sourcesMock';
 
 describe('mutations', () => {
   it('should set sources', () => {
@@ -34,9 +34,23 @@ describe('mutations', () => {
       favorites: [],
       articles: []
     };
-    mutations.toggleFavorite(state, sourcesResMock.sources[0]);
 
-    expect(state.favorites).toContain(sourcesResMock.sources[0]);
+    const sources = sourcesResMock.sources[0];
+
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        setItem: jest.fn(() => null)
+      },
+      writable: true
+    });
+
+    mutations.toggleFavorite(state, sources);
+
+    expect(state.favorites).toContainEqual(sources);
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(
+      'favorite-sources',
+      JSON.stringify([sources])
+    );
   });
 
   it('should toggle show favorites', () => {
@@ -49,5 +63,26 @@ describe('mutations', () => {
     mutations.toggleShowFavorites(state);
 
     expect(state.showFavorites).toBe(false);
+  });
+
+  it('should set initial favorites', () => {
+    const state = {
+      sources: [],
+      showFavorites: true,
+      favorites: [],
+      articles: []
+    };
+    const source = sourcesResMock.sources[0];
+
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: () => JSON.stringify([source])
+      },
+      writable: true
+    });
+
+    mutations.setInitialFavorites(state);
+
+    expect(state.favorites).toContainEqual(source);
   });
 });
