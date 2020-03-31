@@ -8,7 +8,8 @@ describe('mutations', () => {
       sources: [],
       showFavorites: true,
       favorites: [],
-      articles: []
+      articles: [],
+      isLoading: false
     };
     mutations.setSources(state, sourcesResMock.sources);
 
@@ -20,7 +21,8 @@ describe('mutations', () => {
       sources: [],
       showFavorites: true,
       favorites: [],
-      articles: []
+      articles: [],
+      isLoading: false
     };
     mutations.setArticles(state, articlesResMock.articles);
 
@@ -32,7 +34,8 @@ describe('mutations', () => {
       sources: [],
       showFavorites: true,
       favorites: [],
-      articles: []
+      articles: [],
+      isLoading: false
     };
 
     const sources = sourcesResMock.sources[0];
@@ -58,7 +61,8 @@ describe('mutations', () => {
       sources: [],
       showFavorites: true,
       favorites: [],
-      articles: []
+      articles: [],
+      isLoading: false
     };
     mutations.toggleShowFavorites(state);
 
@@ -70,7 +74,8 @@ describe('mutations', () => {
       sources: [],
       showFavorites: true,
       favorites: [],
-      articles: []
+      articles: [],
+      isLoading: false
     };
     const source = sourcesResMock.sources[0];
 
@@ -84,5 +89,18 @@ describe('mutations', () => {
     mutations.setInitialFavorites(state);
 
     expect(state.favorites).toContainEqual(source);
+  });
+
+  it('should set is loading', () => {
+    const state = {
+      sources: [],
+      showFavorites: true,
+      favorites: [],
+      articles: [],
+      isLoading: false
+    };
+    mutations.setIsLoading(state, true);
+
+    expect(state.isLoading).toBe(true);
   });
 });

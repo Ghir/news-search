@@ -50,3 +50,10 @@ test('should set initial favorites', async () => {
 
   expect(commit).toHaveBeenCalledWith('setInitialFavorites');
 });
+
+test('should set is loading', async () => {
+  const commit = jest.fn();
+  await actions.setIsLoading({ commit }, true);
+
+  expect(commit).toHaveBeenCalledWith('setIsLoading', true);
+});
