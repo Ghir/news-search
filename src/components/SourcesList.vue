@@ -1,5 +1,5 @@
 <template>
-  <div v-if="sources.length">
+  <div v-if="currentSources.length">
     <v-text-field
       v-model="search"
       append-icon="mdi-magnify"
