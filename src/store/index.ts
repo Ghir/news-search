@@ -70,19 +70,19 @@ export const actions = {
     commit('setIsLoading', false);
   },
 
-  async toggleFavorite({ commit }, source: Source): Promise<void> {
+  toggleFavorite({ commit }, source: Source): void {
     commit('toggleFavorite', source);
   },
 
-  async toggleShowFavorites({ commit }): Promise<void> {
+  toggleShowFavorites({ commit }): void {
     commit('toggleShowFavorites');
   },
 
-  async setInitialFavorites({ commit }): Promise<void> {
+  setInitialFavorites({ commit }): void {
     commit('setInitialFavorites');
   },
 
-  async setIsLoading({ commit }, value: boolean): Promise<void> {
+  setIsLoading({ commit }, value: boolean): void {
     commit('setIsLoading', value);
   }
 };
