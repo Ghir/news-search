@@ -57,7 +57,7 @@ import { ListType, Article } from '@/types';
 import { mapState } from 'vuex';
 
 @Component({
-  computed: { ...mapState(['articles', 'isLoading']) },
+  computed: { ...mapState(['articles']) },
   filters: {
     cutText: (value: string, type: string): string => {
       if (!value) {
@@ -77,7 +77,7 @@ export default class ArticleList extends Vue {
   ListType = ListType;
   articles: Article[];
   currentSearchType = ListType.Headlines;
-  isLoading: boolean;
+  isLoading = false;
 
   created(): void {
     this.loadArticles(ListType.Headlines);
@@ -92,9 +92,14 @@ export default class ArticleList extends Vue {
     return url;
   }
 
-  loadArticles(type: ListType): void {
+  async loadArticles(type: ListType): Promise<void> {
     this.currentSearchType = type;
-    this.$store.dispatch('loadArticles', { source: this.sourceName, type });
+    this.isLoading = true;
+    await this.$store.dispatch('loadArticles', {
+      source: this.sourceName,
+      type
+    });
+    this.isLoading = false;
   }
 }
 </script>

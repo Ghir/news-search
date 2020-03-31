@@ -43,5 +43,4 @@ export interface State {
   favorites: Source[];
   articles: Article[];
   showFavorites: boolean;
-  isLoading: boolean;
 }

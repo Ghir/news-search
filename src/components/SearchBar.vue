@@ -38,11 +38,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { mapState } from 'vuex';
 
-@Component({
-  computed: { ...mapState(['isLoading']) }
-})
+@Component
 export default class Articles extends Vue {
   categories = [
     { text: 'All', value: '' },
@@ -55,11 +52,13 @@ export default class Articles extends Vue {
     { text: 'Technology', value: 'technology' }
   ];
 
-  isLoading: boolean;
+  isLoading = false;
   selectedCategory = '';
 
-  onSearch(): void {
-    this.$store.dispatch('loadSources', this.selectedCategory);
+  async onSearch(): Promise<void> {
+    this.isLoading = true;
+    await this.$store.dispatch('loadSources', this.selectedCategory);
+    this.isLoading = false;
   }
 
   onToggleFavorites(): void {

@@ -10,8 +10,7 @@ export const state: State = {
   sources: [],
   favorites: [],
   articles: [],
-  showFavorites: false,
-  isLoading: false
+  showFavorites: false
 };
 
 export const mutations: MutationTree<State> = {
@@ -45,29 +44,23 @@ export const mutations: MutationTree<State> = {
     if (savedFavorites) {
       context.favorites = JSON.parse(savedFavorites);
     }
-  },
-
-  setIsLoading(context: State, value: boolean): void {
-    context.isLoading = value;
   }
 };
 
 export const actions = {
-  async loadSources({ commit }, category: string): Promise<void> {
-    commit('setIsLoading', true);
+  async loadSources({ commit }, category: string): Promise<Source[]> {
     const sources = await getSources(category);
     commit('setSources', sources);
-    commit('setIsLoading', false);
+    return sources;
   },
 
   async loadArticles(
     { commit },
     { source, type }: { source: string; type: ListType }
-  ): Promise<void> {
-    commit('setIsLoading', true);
+  ): Promise<Article[]> {
     const articles = await getArticles(source, type);
     commit('setArticles', articles);
-    commit('setIsLoading', false);
+    return articles;
   },
 
   toggleFavorite({ commit }, source: Source): void {
@@ -80,10 +73,6 @@ export const actions = {
 
   setInitialFavorites({ commit }): void {
     commit('setInitialFavorites');
-  },
-
-  setIsLoading({ commit }, value: boolean): void {
-    commit('setIsLoading', value);
   }
 };
 

@@ -32,28 +32,21 @@ test('should load articles', async () => {
 test('should toggle favorite', async () => {
   const commit = jest.fn();
   const source = sourcesResMock.sources[0];
-  await actions.toggleFavorite({ commit }, source);
+  actions.toggleFavorite({ commit }, source);
 
   expect(commit).toHaveBeenCalledWith('toggleFavorite', source);
 });
 
 test('should show favorites', async () => {
   const commit = jest.fn();
-  await actions.toggleShowFavorites({ commit });
+  actions.toggleShowFavorites({ commit });
 
   expect(commit).toHaveBeenCalledWith('toggleShowFavorites');
 });
 
 test('should set initial favorites', async () => {
   const commit = jest.fn();
-  await actions.setInitialFavorites({ commit });
+  actions.setInitialFavorites({ commit });
 
   expect(commit).toHaveBeenCalledWith('setInitialFavorites');
-});
-
-test('should set is loading', async () => {
-  const commit = jest.fn();
-  await actions.setIsLoading({ commit }, true);
-
-  expect(commit).toHaveBeenCalledWith('setIsLoading', true);
 });
