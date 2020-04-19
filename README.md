@@ -1,4 +1,4 @@
-### News Search
+## News Search
 
 See all the latest articles, searching by topic and news source.
 
@@ -8,12 +8,12 @@ See all the latest articles, searching by topic and news source.
 &nbsp;
 &nbsp;
 
-#### Running
+### Running
 
 - `npm install`
 - `npm run serve`
 
-#### Technologies
+### Technologies
 
 - Vue.js
 - Typescript
